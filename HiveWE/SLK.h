@@ -2,12 +2,12 @@
 
 namespace slk {
 	class SLK {
+	public:
 		std::vector<std::vector<std::string>> table_data;
 		std::vector<std::vector<std::string>> shadow_data;
 
 		std::unordered_map<std::string, size_t> header_to_column;
 
-	public:
 		size_t rows = 0;
 		size_t columns = 0;
 

@@ -214,6 +214,7 @@ HiveWE::HiveWE(QWidget* parent) : QMainWindow(parent) {
 
 	connect(ui.actionTrigger_Editor, &QAction::triggered, []() { window_handler.create_or_raise<TriggerEditor>(); });
 	connect(ui.actionImport_Manager, &QAction::triggered, []() { window_handler.create_or_raise<ImportManager>(); });
+	connect(ui.actionObject_Editor, &QAction::triggered, []() { window_handler.create_or_raise<ObjectEditor>(); });
 }
 
 

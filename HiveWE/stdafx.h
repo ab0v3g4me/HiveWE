@@ -84,6 +84,7 @@ namespace fs = std::filesystem;
 #include "StaticMesh.h"
 #include "SkinnedMesh.h"
 
+#include "EditorWidgets.h"
 #include "TriggerStrings.h"
 #include "Triggers.h"
 #include "Imports.h"
@@ -105,6 +106,7 @@ namespace fs = std::filesystem;
 #include "QRibbon.h"
 
 // Menus
+#include "ObjectEditor.h"
 #include "ImportManagerEdit.h"
 #include "ImportManager.h"
 #include "MapInfoEditor.h"

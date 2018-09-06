@@ -12,6 +12,7 @@ public:
 	Doodads doodads;
 	Units units;
 	Imports imports;
+	ObjectEditorExtension objects;
 
 	Brush* brush = nullptr;
 

@@ -81,6 +81,7 @@
     <addaction name="menuNew_Pallete"/>
     <addaction name="actionImport_Manager"/>
     <addaction name="actionTrigger_Editor"/>
+    <addaction name="actionObject_Editor"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -382,6 +383,11 @@
    </property>
    <property name="text">
     <string>Enforce Water Height Limits</string>
+   </property>
+  </action>
+  <action name="actionObject_Editor">
+   <property name="text">
+    <string>Object Editor</string>
    </property>
   </action>
  </widget>

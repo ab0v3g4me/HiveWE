@@ -327,6 +327,21 @@
     <ClCompile Include="QRibbon.cpp">
       <Filter>Source Files\Menus\Custom Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\ReleaseSymbols\moc_ObjectEditor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ObjectEditor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ObjectEditor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorWidgets.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectEditor.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -470,6 +485,12 @@
     <ClInclude Include="SkinnedMesh.h">
       <Filter>Header Files\Base\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_ObjectEditor.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorWidgets.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="HiveWE.h">
@@ -558,6 +579,12 @@
     </CustomBuild>
     <CustomBuild Include="QRibbon.h">
       <Filter>Header Files\Menus\Custom Widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ObjectEditor.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ObjectEditor.h">
+      <Filter>Header Files\Menus</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
