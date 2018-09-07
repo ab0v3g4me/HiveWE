@@ -84,6 +84,7 @@ namespace fs = std::filesystem;
 #include "StaticMesh.h"
 #include "SkinnedMesh.h"
 
+#include "WidgetProperties.h"
 #include "EditorWidgets.h"
 #include "TriggerStrings.h"
 #include "Triggers.h"

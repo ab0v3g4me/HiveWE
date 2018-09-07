@@ -101,12 +101,14 @@ bool Units::load(BinaryReader& reader, Terrain& terrain) {
 	units_slk.merge(ini::INI("Units/UndeadUnitFunc.txt"));
 	units_slk.merge(ini::INI("Units/NightElfUnitFunc.txt"));
 	units_slk.merge(ini::INI("Units/NeutralUnitFunc.txt"));
+	units_slk.merge(ini::INI("Units/CampaignUnitFunc.txt"));
 
 	units_slk.merge(ini::INI("Units/HumanUnitStrings.txt"));
 	units_slk.merge(ini::INI("Units/OrcUnitStrings.txt"));
 	units_slk.merge(ini::INI("Units/UndeadUnitStrings.txt"));
 	units_slk.merge(ini::INI("Units/NightElfUnitStrings.txt"));
 	units_slk.merge(ini::INI("Units/NeutralUnitStrings.txt"));
+	units_slk.merge(ini::INI("Units/CampaignUnitStrings.txt"));
 
 	units_meta_slk = slk::SLK("Units/UnitMetaData.slk");
 

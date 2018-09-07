@@ -13,6 +13,9 @@ public:
 		auto found = std::find_if(windows.begin(), windows.end(), [&](const auto& item) { return item.first == typeid(T).name(); });
 		if (found != windows.end()) {
 			T* window = dynamic_cast<T*>((*found).second);
+			if (window->isHidden()) {
+				window->show();
+			} 
 			window->raise();
 			window->activateWindow();
 			return window;

@@ -336,6 +336,7 @@
     <ClCompile Include="TriggerStrings.cpp" />
     <ClCompile Include="Units.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="WidgetProperties.cpp" />
     <ClCompile Include="WindowHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +347,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CASC.h" />
     <ClInclude Include="CliffMesh.h" />
+    <ClInclude Include="WidgetProperties.h" />
     <CustomBuild Include="WindowHandler.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
