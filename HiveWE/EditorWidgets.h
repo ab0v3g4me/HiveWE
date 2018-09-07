@@ -19,6 +19,7 @@ public:
 	explicit WidgetData(std::string id,std::string name,std::string editor_suffix, std::string parent_id, std::string icon);
 	void display_raw(bool is_raw);
 	//virtual std::string generate_path();
+	virtual ~WidgetData() {};
 };
 
 class UnitWidget : public WidgetData {
@@ -65,6 +66,7 @@ public:
 	std::unordered_map<std::string, std::shared_ptr<WidgetData>> widgets_by_id;
 	std::unordered_map<QTreeWidgetItem*, std::shared_ptr<WidgetData>> widgets_by_item;
 
+	Properties properties;
 
 	template <class T>
 	constexpr bool append(T widget);

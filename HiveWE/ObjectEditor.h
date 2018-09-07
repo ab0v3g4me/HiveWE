@@ -14,10 +14,12 @@ class ObjectEditor : public QMainWindow
 
 	void load();
 
+	void load_properties();
+
 	void display_transition();
 
 	void load_widget_data(QTreeWidgetItem* itm);
-	
+
 	QTreeWidgetItem * units_root_item;
 	QTreeWidgetItem * items_root_item;
 	QTreeWidgetItem * doodads_root_item;

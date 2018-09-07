@@ -111,6 +111,7 @@ bool Units::load(BinaryReader& reader, Terrain& terrain) {
 	units_slk.merge(ini::INI("Units/CampaignUnitStrings.txt"));
 
 	units_meta_slk = slk::SLK("Units/UnitMetaData.slk");
+	units_meta_slk.substitute(world_edit_strings, "WorldEditStrings");
 
 	items_slk = slk::SLK("Units/ItemData.slk");
 	items_slk.merge(ini::INI("Units/ItemFunc.txt"));

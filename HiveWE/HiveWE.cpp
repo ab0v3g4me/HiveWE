@@ -175,7 +175,7 @@ HiveWE::HiveWE(QWidget* parent) : QMainWindow(parent) {
 
 	world_edit_data.substitute(world_edit_game_strings, "WorldEditStrings");
 	world_edit_data.substitute(world_edit_strings, "WorldEditStrings");
-	map.units.units_meta_slk.substitute(world_edit_strings, "WorldEditStrings");
+
 
 	connect(ui.actionOpen, &QAction::triggered, this, &HiveWE::load);
 	connect(ui.actionSave, &QAction::triggered, [&]() { map.save(map.filesystem_path); });

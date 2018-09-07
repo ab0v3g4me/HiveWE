@@ -97,11 +97,6 @@
               <property name="indentation">
                <number>10</number>
               </property>
-              <column>
-               <property name="text">
-                <string notr="true">1</string>
-               </property>
-              </column>
              </widget>
             </item>
            </layout>
@@ -189,11 +184,6 @@
               <property name="indentation">
                <number>10</number>
               </property>
-              <column>
-               <property name="text">
-                <string notr="true">1</string>
-               </property>
-              </column>
              </widget>
             </item>
            </layout>
@@ -281,11 +271,6 @@
               <property name="indentation">
                <number>10</number>
               </property>
-              <column>
-               <property name="text">
-                <string notr="true">1</string>
-               </property>
-              </column>
              </widget>
             </item>
            </layout>
@@ -357,13 +342,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QTreeWidget" name="doodads">
-              <column>
-               <property name="text">
-                <string notr="true">1</string>
-               </property>
-              </column>
-             </widget>
+             <widget class="QTreeWidget" name="doodads"/>
             </item>
            </layout>
           </widget>
@@ -387,6 +366,12 @@
             </item>
             <item>
              <widget class="QTreeWidget" name="doodads_stats">
+              <attribute name="headerDefaultSectionSize">
+               <number>300</number>
+              </attribute>
+              <attribute name="headerMinimumSectionSize">
+               <number>300</number>
+              </attribute>
               <column>
                <property name="text">
                 <string>Name</string>
@@ -434,13 +419,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QTreeWidget" name="abilities">
-              <column>
-               <property name="text">
-                <string notr="true">1</string>
-               </property>
-              </column>
-             </widget>
+             <widget class="QTreeWidget" name="abilities"/>
             </item>
            </layout>
           </widget>
@@ -464,6 +443,12 @@
             </item>
             <item>
              <widget class="QTreeWidget" name="abilities_stats">
+              <attribute name="headerDefaultSectionSize">
+               <number>300</number>
+              </attribute>
+              <attribute name="headerMinimumSectionSize">
+               <number>300</number>
+              </attribute>
               <column>
                <property name="text">
                 <string>Name</string>
@@ -511,13 +496,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QTreeWidget" name="effects">
-              <column>
-               <property name="text">
-                <string notr="true">1</string>
-               </property>
-              </column>
-             </widget>
+             <widget class="QTreeWidget" name="effects"/>
             </item>
            </layout>
           </widget>
@@ -541,6 +520,12 @@
             </item>
             <item>
              <widget class="QTreeWidget" name="effects_stats">
+              <attribute name="headerDefaultSectionSize">
+               <number>300</number>
+              </attribute>
+              <attribute name="headerMinimumSectionSize">
+               <number>300</number>
+              </attribute>
               <column>
                <property name="text">
                 <string>Name</string>
@@ -592,11 +577,6 @@
               <property name="indentation">
                <number>0</number>
               </property>
-              <column>
-               <property name="text">
-                <string notr="true">1</string>
-               </property>
-              </column>
              </widget>
             </item>
            </layout>
@@ -621,6 +601,12 @@
             </item>
             <item>
              <widget class="QTreeWidget" name="upgrades_stats">
+              <attribute name="headerDefaultSectionSize">
+               <number>300</number>
+              </attribute>
+              <attribute name="headerMinimumSectionSize">
+               <number>300</number>
+              </attribute>
               <column>
                <property name="text">
                 <string>Name</string>

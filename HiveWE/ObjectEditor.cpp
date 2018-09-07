@@ -13,9 +13,13 @@ ObjectEditor::ObjectEditor(QWidget *parent) :
     QFileIconProvider icons;
     folder_icon = icons.icon(QFileIconProvider::Folder);
 
-	setup();
 	map.objects.load();
+	map.objects.properties.load();
+
+	setup();
 	load();
+	load_properties();
+
 	show();
 }
 void ObjectEditor::closeEvent(QCloseEvent *event) {
@@ -55,17 +59,12 @@ void ObjectEditor::setup(){
 	connect(ui->unit_search, &QLineEdit::textChanged, [&](const QString &text){  });
 	connect(ui->unit_stats_search, &QLineEdit::textChanged, [&](const QString &text) { });
 
-	//connect(ui->units, &QTreeWidget::customContextMenuRequested, this, &ObjectEditor::custom_menu_popup);
+	connect(ui->units, &QTreeWidget::customContextMenuRequested, this, &ObjectEditor::custom_menu_popup);
 	connect(ui->units, &QTreeWidget::itemClicked, [&](QTreeWidgetItem * item, int column) { load_widget_data(item); });
 
     //==========================//
     // Items Tab Initialization //
     //==========================//
-
-    //items_proxy_model->setSourceModel(items_model);
-    //items_proxy_model->setRecursiveFilteringEnabled(true);
-    //items_proxy_model->setFilterCaseSensitivity(Qt::CaseSensitive);
-
     ui->items->header()->hide();
     ui->item_search->installEventFilter(this);
     ui->item_stats_search->installEventFilter(this);
@@ -74,9 +73,6 @@ void ObjectEditor::setup(){
 
 
 	connect(ui->items, &QTreeWidget::itemClicked, [&](QTreeWidgetItem * item, int column) { load_widget_data(item); });
-    //connect(ui->item_search, &QLineEdit::textChanged, [&](const QString &text){ items_proxy_model->setFilterRegExp(text);});
-	///connect(ui->item_stats_search, &QLineEdit::textChanged, [&](const QString &text) { items_proxy_model->setFilterRegExp(text); });
-
     //==================================//
     // Destructibles Tab Initialization //
     //==================================//
@@ -89,6 +85,17 @@ void ObjectEditor::setup(){
     ui->destructibles_stats->header()->setSectionResizeMode(1, QHeaderView::Stretch);
 
 	connect(ui->destructibles, &QTreeWidget::itemClicked, [&](QTreeWidgetItem * item, int column) { load_widget_data(item); });
+	//==================================//
+	//    Doodads Tab Initialization    //
+	//==================================//
+
+	ui->doodads->header()->hide();
+	ui->doodads_search->installEventFilter(this);
+	ui->doodads_stats_search->installEventFilter(this);
+	ui->doodads_stats->header()->setSectionResizeMode(0, QHeaderView::Fixed);
+	ui->doodads_stats->header()->setSectionResizeMode(1, QHeaderView::Stretch);
+
+	connect(ui->doodads, &QTreeWidget::itemClicked, [&](QTreeWidgetItem * item, int column) { load_widget_data(item); });
 }
 
 void ObjectEditor::custom_menu_popup(const QPoint& pos) {
@@ -102,7 +109,6 @@ void ObjectEditor::custom_menu_popup(const QPoint& pos) {
 	QAction* new_custom_unit = new QAction("New Custom Widget...");
 	QAction* delete_custom_unit = new QAction("Delete Custom Widget...");
 	
-//	connect(new_custom_unit, &QAction::triggered, [&]() { create_custom_unit(item); });
 	
 	menu->addAction(create_as_custom);
 	menu->addAction(new_custom_unit);
@@ -164,7 +170,51 @@ void ObjectEditor::load() {
 
 void ObjectEditor::load_widget_data(QTreeWidgetItem* itm) {
 	auto widget = map.objects.widgets_by_item.at(itm);
-	std::cout << "Selected: " + widget->raw_id << std::endl;
+
+	if (auto u = std::dynamic_pointer_cast<UnitWidget>(widget); u) {
+		
+		for (auto&& p: map.objects.properties.unit_properties) {
+			std::string value = map.units.units_slk.data(p.field, u->raw_id);
+			p.item->setText(1, QString::fromStdString(value));
+		}
+
+	} else if (auto i = std::dynamic_pointer_cast<ItemWidget>(widget); i) {
+		
+		for (auto&& p : map.objects.properties.item_properties) {
+			std::string value = map.units.items_slk.data(p.field, i->raw_id);
+			p.item->setText(1, QString::fromStdString(value));
+		}
+
+	} else if (auto d = std::dynamic_pointer_cast<DoodadWidget>(widget); d) {
+
+		for (auto&& p :  map.objects.properties.doodad_properties) {
+			std::string value = map.doodads.doodads_slk.data(p.field, d->raw_id);
+			p.item->setText(1, QString::fromStdString(value));
+		}
+
+	} else if (auto d = std::dynamic_pointer_cast<DestructibleWidget>(widget); d) {
+
+		for (auto&& p : map.objects.properties.destructible_properties) {
+			std::string value = map.doodads.destructibles_meta_slk.data(p.field, d->raw_id);
+			std::cout << value << std::endl;
+			p.item->setText(1, QString::fromStdString(value));
+		}
+
+	}
 	
 }
 
+void ObjectEditor::load_properties() {
+	for (auto&& p : map.objects.properties.unit_properties) {
+		ui->unit_stats->addTopLevelItem(p.item);
+	}
+	for (auto&& p : map.objects.properties.item_properties) {
+		ui->item_stats->addTopLevelItem(p.item);
+	}
+	for (auto&& p : map.objects.properties.doodad_properties) {
+		ui->doodads_stats->addTopLevelItem(p.item);
+	}
+	for (auto&& p : map.objects.properties.destructible_properties) {
+		ui->destructibles_stats->addTopLevelItem(p.item);
+	}
+}
