@@ -10,6 +10,8 @@ public:
 	void display_raw(bool is_raw);
 };
 
+typedef void (*dialog_pointer)(QTreeWidgetItem*, QTreeWidgetItem*);
+
 class Properties {
 public:
 	std::vector<WidgetProperty> unit_properties;
@@ -17,5 +19,8 @@ public:
 	std::vector<WidgetProperty> doodad_properties;
 	std::vector<WidgetProperty> destructible_properties;
 
+	std::unordered_map<std::string, dialog_pointer> field_dialog;
+
+	void initialize_dialogs();
 	void load();
 };

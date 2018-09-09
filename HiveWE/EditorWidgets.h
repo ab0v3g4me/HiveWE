@@ -1,8 +1,12 @@
 class WidgetCounter {
+public:
+	std::vector<int> unit_count;
+	std::vector<int> item_count;
 
-	static int count;
+	int next(std::vector<int> count);
 };
-int WidgetCounter::count = 0;
+
+
 
 class WidgetData {
 public: 
@@ -18,8 +22,8 @@ public:
 
 	explicit WidgetData(std::string id,std::string name,std::string editor_suffix, std::string parent_id, std::string icon);
 	void display_raw(bool is_raw);
-	//virtual std::string generate_path();
 	virtual ~WidgetData() {};
+	virtual std::string generate_path();
 };
 
 class UnitWidget : public WidgetData {
@@ -28,18 +32,25 @@ public:
 	bool is_building = false;
 	bool is_hero = false;
 	bool is_melee = false;
-
+	std::string generate_path();
+	std::string race() const;
 	using WidgetData::WidgetData;
 };
 
 class ItemWidget : public WidgetData {
+public:
+	std::string generate_path();
 	using WidgetData::WidgetData;
 };
 
 class DestructibleWidget : public WidgetData {
+public:
+	std::string generate_path();
 	using WidgetData::WidgetData;
 };
 class DoodadWidget : public WidgetData {
+public:
+	std::string generate_path();
 	using WidgetData::WidgetData;
 };
 class AbilityWidget : public WidgetData {
@@ -67,6 +78,7 @@ public:
 	std::unordered_map<QTreeWidgetItem*, std::shared_ptr<WidgetData>> widgets_by_item;
 
 	Properties properties;
+	WidgetCounter count_system;
 
 	template <class T>
 	constexpr bool append(T widget);

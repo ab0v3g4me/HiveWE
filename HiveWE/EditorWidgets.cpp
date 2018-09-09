@@ -25,6 +25,22 @@ void WidgetData::display_raw(bool is_raw) {
 	item->setText(0,QString::fromStdString(display));
 }
 
+int WidgetCounter::next(std::vector<int> count) {
+	std::sort(count.begin(), count.end());
+	int value = 0;
+	for (int idx = 0; idx < count.size(); idx++) {
+		if (count.size() > 1 && count[idx + 1] - count[idx] != 1) {
+			value = count[idx]++;
+		} else if (count.size() > 1) {
+			value = count[idx + 1]++;
+		} else if (count.size() == 1) {
+			value = 1;
+		} else {
+			value = 0;
+		}
+	}
+	return value;
+}
 
 template <class T>
 constexpr bool ObjectEditorExtension::append(T widget) {
@@ -71,9 +87,10 @@ void ObjectEditorExtension::load() {
 		std::string path = map.units.units_slk.data("Art", unit_id);
 
 		UnitWidget u(unit_id, unit_name, suffix, "", path);
-		u.is_building = (map.units.units_slk.data("isbldg", unit_id) == "0") ? true : false;
-		u.is_special = (map.units.units_slk.data("special", unit_id) == "0") ? true : false;
+		u.is_building = (map.units.units_slk.data("isbldg", unit_id) == "1") ? true : false;
+		u.is_special = (map.units.units_slk.data("special", unit_id) == "1") ? true : false;
 		u.is_melee = (map.units.units_slk.data("campaign", unit_id) == "0") ? true : false;
+		u.is_hero = (std::isupper(unit_id.at(0))) ? true : false;
 
 		map.objects.append(u);
 	
@@ -109,4 +126,71 @@ void ObjectEditorExtension::load() {
 
 void ObjectEditorExtension::save() const {
 
+}
+
+std::string WidgetData::generate_path() {
+	return "";
+}
+
+std::string UnitWidget::generate_path() {
+	std::string melee = (is_melee) ? "Melee" : "Campaign";
+	std::string type;
+	
+	if (is_hero && !is_special) {
+		type = "Heroes";
+	} else if (is_building) {
+		type = "Buildings";
+	} else if (is_special) {
+		type = "Special";
+	} else {
+		type = "Units";
+	}
+	return race() + "\\" + melee + "\\" + type;
+}
+
+std::string UnitWidget::race() const {
+	std::string race = map.units.units_slk.data("race", raw_id);
+	
+	if (race == "orc") {
+		return "Orc";
+	} else if (race == "human") {
+		return "Human";
+	} else if (race == "undead") {
+		return "Undead";
+	} else if (race == "nightelf") {
+		return "Night Elf";
+	} else if (race == "creeps") {
+		return "Neutral Hostile";
+	} else if (race == "naga") {
+		return "Naga";
+	}
+	return "Neutral Passive";
+}
+
+std::string ItemWidget::generate_path() {
+	return map.units.items_slk.data("class", raw_id);
+}
+std::string DestructibleWidget::generate_path() {
+	std::string type = map.doodads.destructibles_slk.data("category", raw_id);
+	if (type == "D") {
+		return "Trees/Destructibles";
+	} else if (type == "B") {
+		return "Bridges/Ramps";
+	}
+	return "Pathing Blockers";
+}
+std::string DoodadWidget::generate_path() {
+	std::string type = map.doodads.doodads_slk.data("category", raw_id);
+	if (type == "E") {
+		return "Enviroment";
+	} else if (type == "W") {
+		return "Water";
+	} else if (type == "O") {
+		return "Props";
+	} else if (type == "S") {
+		return "Structures";
+	} else if (type == "C") {
+		return "Cliff/Terrain";
+	}
+	return "Cinematic";
 }

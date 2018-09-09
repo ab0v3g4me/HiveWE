@@ -18,20 +18,33 @@ class ObjectEditor : public QMainWindow
 
 	void display_transition();
 
-	void load_widget_data(QTreeWidgetItem* itm);
+	void load_widget_data(QTreeWidgetItem* item);
 
-	QTreeWidgetItem * units_root_item;
-	QTreeWidgetItem * items_root_item;
-	QTreeWidgetItem * doodads_root_item;
-	QTreeWidgetItem * destructibles_root_item;
+	void create_folder(WidgetData* widget);
 
-	std::unordered_map<std::string, QTreeWidgetItem*> standard_folder_hierarchy;
-	std::unordered_map<std::string, QTreeWidgetItem*> custom_folder_hierarchy;
+	QTreeWidgetItem* units_root_item;
+	QTreeWidgetItem* standard_units;
+	QTreeWidgetItem* custom_units;
+	
+	QTreeWidgetItem* items_root_item;
+	QTreeWidgetItem* standard_items;
+	QTreeWidgetItem* custom_items;
+
+	QTreeWidgetItem* doodads_root_item;
+	QTreeWidgetItem* standard_doodads;
+	QTreeWidgetItem* custom_doodads;
+
+	QTreeWidgetItem* destructibles_root_item;
+	QTreeWidgetItem* standard_destructibles;
+	QTreeWidgetItem* custom_destructibles;
+
+	std::unordered_map<std::string, QTreeWidgetItem*> folder_hierarchy;
+
 
 	void custom_menu_popup(const QPoint& pos);
 
 
-	QColor changed_field_color = QColor(200,0,0);
+	QColor changed_field_color = QColor(200, 0, 0);
 	QColor default_color = QColor(0, 0, 0);
 	
     QIcon folder_icon;

@@ -45,3 +45,7 @@ void Properties::load() {
 		destructible_properties.push_back(p);
 	}
 }
+
+void Properties::initialize_dialogs() {
+
+}
