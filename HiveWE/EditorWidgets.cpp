@@ -172,25 +172,15 @@ std::string ItemWidget::generate_path() {
 }
 std::string DestructibleWidget::generate_path() {
 	std::string type = map.doodads.destructibles_slk.data("category", raw_id);
-	if (type == "D") {
-		return "Trees/Destructibles";
-	} else if (type == "B") {
-		return "Bridges/Ramps";
-	}
-	return "Pathing Blockers";
+	std::vector<std::string> pair = world_edit_data.whole_data("DestructibleCategories", type);
+	auto icon = texture_to_icon(pair.at(1) + ".blp");
+	item->setIcon(0, icon);
+	return pair.at(0);
 }
 std::string DoodadWidget::generate_path() {
 	std::string type = map.doodads.doodads_slk.data("category", raw_id);
-	if (type == "E") {
-		return "Enviroment";
-	} else if (type == "W") {
-		return "Water";
-	} else if (type == "O") {
-		return "Props";
-	} else if (type == "S") {
-		return "Structures";
-	} else if (type == "C") {
-		return "Cliff/Terrain";
-	}
-	return "Cinematic";
+	std::vector<std::string> pair = world_edit_data.whole_data("DoodadCategories", type);
+	auto icon = texture_to_icon(pair.at(1) + ".blp");
+	item->setIcon(0, icon);
+	return pair.at(0);
 }
