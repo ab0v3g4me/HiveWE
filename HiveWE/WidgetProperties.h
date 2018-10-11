@@ -18,6 +18,7 @@ public:
 	std::vector<WidgetProperty> item_properties;
 	std::vector<WidgetProperty> doodad_properties;
 	std::vector<WidgetProperty> destructible_properties;
+	std::vector<WidgetProperty> ability_properties;
 
 	std::unordered_map<std::string, dialog_pointer> field_dialog;
 

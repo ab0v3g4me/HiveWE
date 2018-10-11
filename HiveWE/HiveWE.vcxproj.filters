@@ -345,6 +345,9 @@
     <ClCompile Include="WidgetProperties.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Abilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -495,6 +498,9 @@
       <Filter>Header Files\Base</Filter>
     </ClInclude>
     <ClInclude Include="WidgetProperties.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Abilities.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>

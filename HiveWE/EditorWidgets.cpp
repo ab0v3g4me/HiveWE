@@ -122,6 +122,20 @@ void ObjectEditorExtension::load() {
 
 	}
 
+	for (int row = 1; row < map.abilities.abilities_slk.rows; row++) {
+		std::string ability_id = map.abilities.abilities_slk.table_data[row][0];
+		std::string ability_name = map.abilities.abilities_slk.data("comments", ability_id);
+		std::string suffix = map.abilities.abilities_slk.data("EditorSuffix", ability_id);
+		std::string path = map.abilities.abilities_slk.data("Art", ability_id);
+		if (split(path, '\\').size() != 3) {
+			path = "";
+		}
+		AbilityWidget a(ability_id, ability_name, suffix, "", path);
+		a.is_hero = (map.abilities.abilities_slk.data("hero", ability_id) == "1")? true : false;
+		map.objects.append(a);
+
+	}
+
 }
 
 void ObjectEditorExtension::save() const {
@@ -183,4 +197,10 @@ std::string DoodadWidget::generate_path() {
 	auto icon = texture_to_icon(pair.at(1) + ".blp");
 	item->setIcon(0, icon);
 	return pair.at(0);
+}
+
+std::string AbilityWidget::generate_path() {
+	std::string race = map.abilities.abilities_slk.data("race", raw_id);
+	std::string hero = (is_hero) ? "Heroes" : "Units";
+	return race + "\\" + hero;
 }

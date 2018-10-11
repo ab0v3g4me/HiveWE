@@ -37,7 +37,8 @@ void ObjectEditor::setup(){
 	items_root_item = ui->items->invisibleRootItem();
 	doodads_root_item = ui->doodads->invisibleRootItem();
 	destructibles_root_item = ui->destructibles->invisibleRootItem();
-	
+	abilities_root_item = ui->abilities->invisibleRootItem();
+
 	standard_units = new QTreeWidgetItem(units_root_item);
 	standard_units->setText(0, QString::fromStdString("Standard Units"));
 	standard_units->setText(1, QString::fromStdString("D"));
@@ -77,6 +78,16 @@ void ObjectEditor::setup(){
 	custom_doodads->setText(0, QString::fromStdString("Custom Doodads"));
 	custom_doodads->setText(1, QString::fromStdString("D"));
 	custom_doodads->setIcon(0, folder_icon);
+
+	standard_abilities = new QTreeWidgetItem(abilities_root_item);
+	standard_abilities->setText(0, QString::fromStdString("Standard Abilities"));
+	standard_abilities->setText(1, QString::fromStdString("D"));
+	standard_abilities->setIcon(0, folder_icon);
+
+	custom_abilities = new QTreeWidgetItem(abilities_root_item);
+	custom_abilities->setText(0, QString::fromStdString("Custom Abilities"));
+	custom_abilities->setText(1, QString::fromStdString("D"));
+	custom_abilities->setIcon(0, folder_icon);
     //==========================//
     // Units Tab Initialization //
     //==========================// 
@@ -130,6 +141,17 @@ void ObjectEditor::setup(){
 	ui->doodads_stats->header()->setSectionResizeMode(1, QHeaderView::Stretch);
 
 	connect(ui->doodads, &QTreeWidget::itemClicked, [&](QTreeWidgetItem * item, int column) { load_widget_data(item); });
+	//==================================//
+	//   Abilities Tab Initialization   //
+	//==================================//
+	ui->abilities->header()->hide();
+	ui->abilities_search->installEventFilter(this);
+	ui->abilities_stats_search->installEventFilter(this);
+	ui->abilities_stats->header()->setSectionResizeMode(0, QHeaderView::Fixed);
+	ui->abilities_stats->header()->setSectionResizeMode(1, QHeaderView::Stretch);
+
+	connect(ui->abilities, &QTreeWidget::itemClicked, [&](QTreeWidgetItem * item, int column) { load_widget_data(item); });
+
 }
 
 void ObjectEditor::create_folder(WidgetData* widget) {
@@ -148,6 +170,9 @@ void ObjectEditor::create_folder(WidgetData* widget) {
 	} else if (auto d = dynamic_cast<DestructibleWidget*>(widget); d) {
 		path = d->generate_path();
 		root_item = (!d->is_custom) ? destructibles_root_item->child(0) : destructibles_root_item->child(1);
+	} else if (auto a = dynamic_cast<AbilityWidget*>(widget); a) {
+		path = a->generate_path();
+		root_item = (!a->is_custom) ? abilities_root_item->child(0) : abilities_root_item->child(1);
 	}
 
 	if (folder_hierarchy.find(path) == folder_hierarchy.end()) {
@@ -227,6 +252,9 @@ void ObjectEditor::display_transition() {
 	for (auto&& d : map.objects.destructibles) {
 		d.display_raw(show_as_raw);
 	}
+	for (auto&& a : map.objects.abilities) {
+		a.display_raw(show_as_raw);
+	}
 }
 
 void ObjectEditor::load() {
@@ -241,6 +269,9 @@ void ObjectEditor::load() {
 	}
 	for (auto&& d : map.objects.destructibles) {
 		create_folder(&d);
+	}
+	for (auto&& a : map.objects.abilities) {
+		create_folder(&a);
 	}
 }
 
@@ -270,6 +301,11 @@ void ObjectEditor::load_widget_data(QTreeWidgetItem* item) {
 			std::string value = map.doodads.destructibles_slk.data(p.field, d->raw_id);
 			p.item->setText(1, QString::fromStdString(value));
 		}
+	} else if (auto a = std::dynamic_pointer_cast<AbilityWidget>(widget); a) {
+		for (auto&& p : map.objects.properties.ability_properties) {
+			std::string value = map.abilities.abilities_slk.data(p.field, a->raw_id);
+			p.item->setText(1, QString::fromStdString(value));
+		}
 	}
 }
 
@@ -285,5 +321,8 @@ void ObjectEditor::load_properties() {
 	}
 	for (auto&& p : map.objects.properties.destructible_properties) {
 		ui->destructibles_stats->addTopLevelItem(p.item);
+	}
+	for (auto&& p : map.objects.properties.ability_properties) {
+		ui->abilities_stats->addTopLevelItem(p.item);
 	}
 }

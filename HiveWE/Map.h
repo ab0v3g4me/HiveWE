@@ -13,6 +13,7 @@ public:
 	Units units;
 	Imports imports;
 	ObjectEditorExtension objects;
+	Abilities abilities;
 
 	Brush* brush = nullptr;
 

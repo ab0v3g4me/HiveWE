@@ -54,12 +54,17 @@ public:
 	using WidgetData::WidgetData;
 };
 class AbilityWidget : public WidgetData {
+public:
+	bool is_hero = false;
+	std::string generate_path();
 	using WidgetData::WidgetData;
 };
 class UpgradeWidget : public WidgetData {
+	//std::string generate_path();
 	using WidgetData::WidgetData;
 };
 class EffectWidget : public WidgetData {
+	//std::string generate_path();
 	using WidgetData::WidgetData;
 };
 

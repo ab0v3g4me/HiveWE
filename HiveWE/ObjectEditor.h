@@ -38,6 +38,10 @@ class ObjectEditor : public QMainWindow
 	QTreeWidgetItem* standard_destructibles;
 	QTreeWidgetItem* custom_destructibles;
 
+	QTreeWidgetItem* abilities_root_item;
+	QTreeWidgetItem* standard_abilities;
+	QTreeWidgetItem* custom_abilities;
+
 	std::unordered_map<std::string, QTreeWidgetItem*> folder_hierarchy;
 
 

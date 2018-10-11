@@ -44,6 +44,15 @@ void Properties::load() {
 		WidgetProperty p(raw_id, field, name);
 		destructible_properties.push_back(p);
 	}
+
+	for (int row = 1; row < map.abilities.abilities_meta_slk.rows; row++) {
+		std::string raw_id = map.abilities.abilities_meta_slk.table_data[row][0];
+		std::string field = map.abilities.abilities_meta_slk.data("field", raw_id);
+		std::string name = map.abilities.abilities_meta_slk.data("displayName", raw_id);
+
+		WidgetProperty p(raw_id, field, name);
+		ability_properties.push_back(p);
+	}
 }
 
 void Properties::initialize_dialogs() {

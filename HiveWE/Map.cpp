@@ -84,6 +84,7 @@ void Map::load(const fs::path& path) {
 	if (hierarchy.map.file_exists("war3mapUnits.doo")) {
 		BinaryReader war3mapUnits_doo(hierarchy.map.file_open("war3mapUnits.doo").read());
 		units_loaded = units.load(war3mapUnits_doo, terrain);
+		abilities.load();
 
 		if (units_loaded) {
 			if (hierarchy.map.file_exists("war3map.w3u")) {
